@@ -539,7 +539,8 @@ class UpdateWorkflow(Workflow):
         else:
             # """""""""""""""""""""""
             dserv = None
-            if self.bank.config.get('micro.biomaj.service.download', default=None) == '1':
+            if self.bank.config.get('micro.biomaj.service.download', default=None) == '1' \
+                    and not self.bank.options.get_options('force_local'):
                 dserv = DownloadClient(
                     self.bank.config.get('micro.biomaj.rabbit_mq'),
                     int(self.bank.config.get('micro.biomaj.rabbit_mq_port', default='5672')),
@@ -924,7 +925,8 @@ class UpdateWorkflow(Workflow):
         pool_size = self.session.config.get('files.num.threads', default=None)
 
         dserv = None
-        if self.bank.config.get('micro.biomaj.service.download', default=None) == '1':
+        if self.bank.config.get('micro.biomaj.service.download', default=None) == '1' \
+                and not self.bank.options.get_options('force_local'):
             dserv = DownloadClient(
                 self.bank.config.get('micro.biomaj.rabbit_mq'),
                 int(self.bank.config.get('micro.biomaj.rabbit_mq_port', default='5672')),
@@ -1290,7 +1292,8 @@ class UpdateWorkflow(Workflow):
         pool_size = self.session.config.get('files.num.threads', default=None)
         dserv = None
 
-        if self.bank.config.get('micro.biomaj.service.download', default=None) == '1':
+        if self.bank.config.get('micro.biomaj.service.download', default=None) == '1' \
+                and not self.bank.options.get_options('force_local'):
             dserv = DownloadClient(
                 self.bank.config.get('micro.biomaj.rabbit_mq'),
                 int(self.bank.config.get('micro.biomaj.rabbit_mq_port', default='5672')),
